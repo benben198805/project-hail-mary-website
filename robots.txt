@@ -1,0 +1,8 @@
+User-agent: *
+Allow: /
+
+# Disallow admin or private paths (none currently)
+# Disallow: /private/
+
+# Sitemap location
+Sitemap: https://phmexplained.com/sitemap.xml
