@@ -1686,3 +1686,985 @@ p:last-child { margin-bottom: 0; }
     padding: 30px 16px 40px;
   }
 }
+
+/* ===========================================
+   NASA + Artemis Expansion Styles
+   NASA HUD, Telemetry, Mission Panels,
+   Interactive Timeline, Astronaut Profiles
+   =========================================== */
+
+/* --- NASA Color Vars --- */
+:root {
+  --nasa-deep-space: #06080d;
+  --nasa-blue: #0b3d91;
+  --nasa-blue-light: #1a5bbf;
+  --lunar-gray: #c9ced6;
+  --orion-orange: #f07d19;
+  --orion-orange-glow: rgba(240, 125, 25, 0.2);
+  --telemetry-green: #4ade80;
+  --telemetry-yellow: #facc15;
+  --telemetry-red: #ef4444;
+  --hud-alpha: rgba(11, 61, 145, 0.12);
+  --hud-border: rgba(11, 61, 145, 0.3);
+}
+
+/* --- HUD Panel --- */
+.hud-panel {
+  background: rgba(6, 8, 13, 0.85);
+  border: 1px solid var(--hud-border);
+  border-radius: var(--radius-md);
+  padding: 24px;
+  font-family: var(--font-mono);
+  position: relative;
+  overflow: hidden;
+}
+
+.hud-panel::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 1px;
+  background: linear-gradient(90deg, transparent, var(--nasa-blue), transparent);
+}
+
+.hud-panel-title {
+  font-family: var(--font-mono);
+  font-size: 0.7rem;
+  text-transform: uppercase;
+  letter-spacing: 0.15em;
+  color: var(--nasa-blue-light);
+  margin-bottom: 16px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.hud-panel-title::before {
+  content: '◆';
+  font-size: 0.5rem;
+  color: var(--telemetry-green);
+}
+
+.hud-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+  gap: 12px;
+}
+
+.hud-item {
+  padding: 12px;
+  background: rgba(11, 61, 145, 0.06);
+  border-radius: 4px;
+  border-left: 2px solid var(--nasa-blue);
+}
+
+.hud-label {
+  font-family: var(--font-mono);
+  font-size: 0.6rem;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  color: var(--text-tertiary);
+  margin-bottom: 4px;
+}
+
+.hud-value {
+  font-family: var(--font-display);
+  font-size: 1.1rem;
+  font-weight: 600;
+  color: var(--text-primary);
+}
+
+.hud-value.nominal { color: var(--telemetry-green); }
+.hud-value.caution { color: var(--telemetry-yellow); }
+.hud-value.alert { color: var(--telemetry-red); }
+
+/* --- Mission Status Badge --- */
+.mission-status {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 6px 14px;
+  border-radius: 100px;
+  font-size: 0.75rem;
+  font-weight: 600;
+  font-family: var(--font-mono);
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+}
+
+.mission-status::before {
+  content: '';
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  animation: pulse-dot 2s ease-in-out infinite;
+}
+
+.mission-status.nominal {
+  background: rgba(74, 222, 128, 0.1);
+  border: 1px solid rgba(74, 222, 128, 0.2);
+  color: var(--telemetry-green);
+}
+.mission-status.nominal::before { background: var(--telemetry-green); }
+
+.mission-status.in-progress {
+  background: rgba(250, 204, 21, 0.1);
+  border: 1px solid rgba(250, 204, 21, 0.2);
+  color: var(--telemetry-yellow);
+}
+.mission-status.in-progress::before { background: var(--telemetry-yellow); }
+
+.mission-status.completed {
+  background: rgba(148, 163, 184, 0.1);
+  border: 1px solid rgba(148, 163, 184, 0.2);
+  color: var(--text-tertiary);
+}
+.mission-status.completed::before { background: var(--text-tertiary); }
+
+@keyframes pulse-dot {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0.3; }
+}
+
+/* --- Artemis Hero --- */
+.artemis-hero {
+  position: relative;
+  min-height: 90vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 120px 24px 80px;
+  overflow: hidden;
+  background: var(--nasa-deep-space);
+}
+
+.artemis-hero::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+  background:
+    radial-gradient(ellipse at 20% 30%, rgba(11, 61, 145, 0.15) 0%, transparent 50%),
+    radial-gradient(ellipse at 80% 70%, rgba(240, 125, 25, 0.06) 0%, transparent 50%),
+    linear-gradient(180deg, transparent 0%, rgba(6, 8, 13, 0.8) 100%);
+  pointer-events: none;
+}
+
+.artemis-hero .hero-content {
+  position: relative;
+  z-index: 2;
+  text-align: center;
+  max-width: 860px;
+}
+
+.artemis-hero .hero-title {
+  font-size: clamp(2.2rem, 5vw, 4rem);
+  line-height: 1.15;
+  margin-bottom: 16px;
+}
+
+.artemis-hero .hero-title .highlight {
+  color: var(--orion-orange);
+}
+
+.artemis-hero .hero-subtitle {
+  color: var(--lunar-gray);
+  max-width: 650px;
+  margin: 0 auto 32px;
+  font-size: 1.1rem;
+  line-height: 1.7;
+}
+
+/* --- Orion Orange Accent --- */
+.text-orion { color: var(--orion-orange); }
+.border-orion { border-color: var(--orion-orange); }
+.bg-orion-glow { background: var(--orion-orange-glow); }
+
+.btn-orion {
+  background: var(--orion-orange);
+  color: #fff;
+  box-shadow: 0 0 20px rgba(240, 125, 25, 0.2);
+}
+.btn-orion:hover {
+  background: #e06d0f;
+  color: #fff;
+  transform: translateY(-2px);
+  box-shadow: 0 0 30px rgba(240, 125, 25, 0.35);
+}
+
+/* --- Comparison Table (Fiction vs Reality) --- */
+.fiction-compare {
+  width: 100%;
+  border-collapse: separate;
+  border-spacing: 0;
+  margin: 32px 0;
+  border-radius: var(--radius-md);
+  overflow: hidden;
+  border: 1px solid var(--border-color);
+  font-size: 0.95rem;
+}
+
+.fiction-compare thead th {
+  padding: 16px 20px;
+  font-family: var(--font-display);
+  font-weight: 600;
+  font-size: 0.85rem;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  text-align: left;
+  border-bottom: 2px solid var(--border-color);
+}
+
+.fiction-compare thead th:first-child {
+  background: rgba(79, 195, 247, 0.06);
+  color: var(--accent-blue);
+  width: 25%;
+}
+
+.fiction-compare thead th:last-child {
+  background: rgba(240, 125, 25, 0.06);
+  color: var(--orion-orange);
+}
+
+.fiction-compare tbody td {
+  padding: 16px 20px;
+  border-bottom: 1px solid var(--border-color);
+  color: var(--text-secondary);
+  vertical-align: top;
+  line-height: 1.7;
+}
+
+.fiction-compare tbody td:first-child {
+  background: rgba(79, 195, 247, 0.03);
+  color: var(--accent-blue);
+  font-weight: 500;
+}
+
+.fiction-compare tbody td:last-child {
+  background: rgba(240, 125, 25, 0.03);
+}
+
+.fiction-compare tbody tr:last-child td {
+  border-bottom: none;
+}
+
+.fiction-compare tbody tr:hover td {
+  background: var(--bg-card-hover);
+}
+
+/* --- Interactive Era Timeline (Apollo → Artemis → Mars) --- */
+.era-timeline {
+  position: relative;
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  padding: 40px 0 60px;
+  margin: 40px 0;
+}
+
+.era-timeline::before {
+  content: '';
+  position: absolute;
+  top: 48px;
+  left: 0;
+  right: 0;
+  height: 2px;
+  background: linear-gradient(90deg, var(--accent-blue), var(--orion-orange), var(--accent-purple), var(--accent-teal));
+  z-index: 0;
+}
+
+.era-node {
+  position: relative;
+  z-index: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  flex: 1;
+  cursor: pointer;
+  text-decoration: none;
+  color: inherit;
+  transition: all var(--transition-normal);
+}
+
+.era-node:hover {
+  transform: translateY(-4px);
+}
+
+.era-node-dot {
+  width: 20px;
+  height: 20px;
+  border-radius: 50%;
+  border: 3px solid var(--bg-primary);
+  margin-bottom: 16px;
+  position: relative;
+  transition: all var(--transition-normal);
+  box-shadow: 0 0 0 2px var(--border-color);
+}
+
+.era-node.active .era-node-dot {
+  box-shadow: 0 0 0 3px var(--accent-blue), 0 0 20px rgba(79, 195, 247, 0.3);
+  transform: scale(1.2);
+}
+
+.era-node:nth-child(1) .era-node-dot { background: var(--accent-blue); }
+.era-node:nth-child(2) .era-node-dot { background: var(--accent-teal); }
+.era-node:nth-child(3) .era-node-dot { background: var(--orion-orange); }
+.era-node:nth-child(4) .era-node-dot { background: var(--accent-purple); }
+.era-node:nth-child(5) .era-node-dot { background: var(--accent-green); }
+
+.era-node-year {
+  font-family: var(--font-display);
+  font-size: 0.8rem;
+  font-weight: 600;
+  color: var(--text-tertiary);
+  margin-bottom: 4px;
+}
+
+.era-node-label {
+  font-family: var(--font-display);
+  font-size: 1.1rem;
+  font-weight: 600;
+  color: var(--text-primary);
+  margin-bottom: 4px;
+  text-align: center;
+}
+
+.era-node-desc {
+  font-size: 0.75rem;
+  color: var(--text-tertiary);
+  text-align: center;
+  max-width: 120px;
+  line-height: 1.4;
+}
+
+.era-node-future .era-node-dot {
+  border-style: dashed;
+  opacity: 0.5;
+}
+
+.era-node-future .era-node-label {
+  opacity: 0.5;
+}
+
+/* --- Era Detail Panel --- */
+.era-detail {
+  display: none;
+  background: var(--bg-card);
+  border: 1px solid var(--border-color);
+  border-radius: var(--radius-lg);
+  padding: 32px;
+  margin: 24px 0;
+  transition: all var(--transition-normal);
+  animation: fadeInUp 0.4s ease forwards;
+}
+
+.era-detail.active {
+  display: block;
+}
+
+.era-detail h3 {
+  color: var(--accent-blue);
+  margin-bottom: 12px;
+}
+
+.era-detail p {
+  color: var(--text-secondary);
+  line-height: 1.8;
+}
+
+.era-detail .era-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  margin-top: 16px;
+  color: var(--accent-blue);
+  font-weight: 500;
+  text-decoration: none;
+}
+
+.era-detail .era-link:hover {
+  color: var(--text-primary);
+}
+
+/* --- Astronaut Profile Cards --- */
+.astronaut-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 24px;
+  margin: 32px 0;
+}
+
+.astronaut-card {
+  background: var(--bg-card);
+  border: 1px solid var(--border-color);
+  border-radius: var(--radius-lg);
+  overflow: hidden;
+  transition: all var(--transition-normal);
+}
+
+.astronaut-card:hover {
+  border-color: var(--accent-blue);
+  transform: translateY(-4px);
+  box-shadow: var(--shadow-glow-blue);
+}
+
+.astronaut-card-visual {
+  height: 200px;
+  position: relative;
+  overflow: hidden;
+  background: var(--bg-tertiary);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.astronaut-card-visual img {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.astronaut-card-visual .astronaut-placeholder {
+  font-size: 3rem;
+  opacity: 0.3;
+  font-family: var(--font-display);
+  font-weight: 700;
+  color: var(--accent-blue);
+}
+
+.astronaut-card-body {
+  padding: 24px;
+}
+
+.astronaut-card-body .astronaut-name {
+  font-family: var(--font-display);
+  font-size: 1.2rem;
+  font-weight: 600;
+  margin-bottom: 4px;
+}
+
+.astronaut-card-body .astronaut-role {
+  font-size: 0.85rem;
+  color: var(--orion-orange);
+  font-weight: 500;
+  margin-bottom: 12px;
+}
+
+.astronaut-card-body .astronaut-bio {
+  font-size: 0.9rem;
+  color: var(--text-secondary);
+  line-height: 1.6;
+}
+
+.astronaut-card-body .astronaut-comparison {
+  margin-top: 16px;
+  padding-top: 16px;
+  border-top: 1px solid var(--border-color);
+  font-size: 0.85rem;
+  color: var(--accent-blue);
+  font-style: italic;
+}
+
+/* --- Speculation / Deep Dive Cards --- */
+.spec-card {
+  background: var(--bg-card);
+  border: 1px solid var(--border-color);
+  border-radius: var(--radius-lg);
+  padding: 32px;
+  margin: 24px 0;
+  transition: all var(--transition-normal);
+  position: relative;
+  overflow: hidden;
+}
+
+.spec-card::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 3px;
+  height: 100%;
+  background: var(--gradient-primary);
+  opacity: 0.5;
+}
+
+.spec-card:hover {
+  border-color: var(--accent-blue);
+  background: var(--bg-card-hover);
+}
+
+.spec-card h3 {
+  font-size: 1.3rem;
+  margin-bottom: 8px;
+}
+
+.spec-card .spec-tag {
+  display: inline-block;
+  padding: 4px 10px;
+  border-radius: 100px;
+  font-size: 0.7rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  margin-bottom: 16px;
+}
+
+.spec-tag.reality { background: rgba(79, 195, 247, 0.1); color: var(--accent-blue); }
+.spec-tag.speculative { background: rgba(206, 147, 216, 0.1); color: var(--accent-purple); }
+.spec-tag.hybrid { background: rgba(255, 183, 77, 0.1); color: var(--accent-orange); }
+
+.spec-card .spec-verdict {
+  display: inline-block;
+  margin-top: 16px;
+  padding: 8px 16px;
+  border-radius: var(--radius-sm);
+  font-weight: 600;
+  font-size: 0.85rem;
+}
+
+.spec-verdict.plausible { background: rgba(74, 222, 128, 0.1); color: var(--telemetry-green); }
+.spec-verdict.likely { background: rgba(250, 204, 21, 0.1); color: var(--telemetry-yellow); }
+.spec-verdict.unlikely { background: rgba(239, 68, 68, 0.1); color: var(--telemetry-red); }
+
+.spec-card p {
+  color: var(--text-secondary);
+  line-height: 1.8;
+}
+
+/* --- Interactive Mission Panel --- */
+.mission-panel {
+  background: var(--bg-card);
+  border: 1px solid var(--border-color);
+  border-radius: var(--radius-lg);
+  overflow: hidden;
+  margin: 24px 0;
+  transition: all var(--transition-normal);
+}
+
+.mission-panel-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 20px 24px;
+  cursor: pointer;
+  user-select: none;
+  transition: background var(--transition-fast);
+}
+
+.mission-panel-header:hover {
+  background: var(--bg-card-hover);
+}
+
+.mission-panel-header h3 {
+  font-size: 1.1rem;
+  margin: 0;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.mission-panel-header .panel-toggle {
+  font-size: 1.2rem;
+  color: var(--text-tertiary);
+  transition: transform var(--transition-fast);
+}
+
+.mission-panel.open .panel-toggle {
+  transform: rotate(45deg);
+}
+
+.mission-panel-body {
+  max-height: 0;
+  overflow: hidden;
+  transition: max-height 0.4s ease, padding 0.3s ease;
+}
+
+.mission-panel.open .mission-panel-body {
+  max-height: 800px;
+  padding: 0 24px 24px;
+}
+
+.mission-panel-body p {
+  color: var(--text-secondary);
+  line-height: 1.8;
+}
+
+.mission-panel-body .tech-spec {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
+  gap: 12px;
+  margin: 16px 0;
+}
+
+.mission-panel-body .tech-spec-item {
+  padding: 12px;
+  background: var(--bg-tertiary);
+  border-radius: var(--radius-sm);
+  text-align: center;
+}
+
+.mission-panel-body .tech-spec-value {
+  font-family: var(--font-display);
+  font-size: 1.1rem;
+  font-weight: 600;
+  color: var(--accent-blue);
+}
+
+.mission-panel-body .tech-spec-label {
+  font-size: 0.75rem;
+  color: var(--text-tertiary);
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+
+/* --- Launch Sequence Animation --- */
+.launch-sequence {
+  background: var(--nasa-deep-space);
+  border: 1px solid var(--hud-border);
+  border-radius: var(--radius-lg);
+  padding: 40px;
+  margin: 32px 0;
+  text-align: center;
+  position: relative;
+  overflow: hidden;
+}
+
+.launch-sequence .rocket-wrapper {
+  position: relative;
+  width: 60px;
+  height: 120px;
+  margin: 0 auto 32px;
+}
+
+.launch-sequence .rocket {
+  position: absolute;
+  bottom: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 30px;
+  height: 70px;
+  background: linear-gradient(180deg, var(--lunar-gray), var(--text-secondary));
+  border-radius: 6px 6px 0 0;
+  transition: all 1s ease;
+}
+
+.launch-sequence .rocket.launching {
+  transform: translateX(-50%) translateY(-200px);
+  opacity: 0;
+}
+
+.launch-sequence .rocket-exhaust {
+  position: absolute;
+  bottom: -10px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 20px;
+  height: 30px;
+  background: linear-gradient(180deg, var(--orion-orange), transparent);
+  border-radius: 0 0 10px 10px;
+  animation: flicker 0.15s ease-in-out infinite alternate;
+}
+
+@keyframes flicker {
+  0% { opacity: 0.6; height: 25px; }
+  100% { opacity: 1; height: 35px; }
+}
+
+.launch-sequence .countdown {
+  font-family: var(--font-mono);
+  font-size: 3rem;
+  font-weight: 700;
+  color: var(--orion-orange);
+  margin-bottom: 16px;
+  letter-spacing: 0.05em;
+}
+
+.launch-sequence .countdown-label {
+  font-family: var(--font-mono);
+  font-size: 0.75rem;
+  text-transform: uppercase;
+  letter-spacing: 0.15em;
+  color: var(--text-tertiary);
+}
+
+.launch-sequence .launch-btn {
+  margin-top: 24px;
+}
+
+/* --- From Fiction to Reality (Home section) --- */
+.fiction-reality-section {
+  position: relative;
+  padding: 100px 24px;
+  background: var(--nasa-deep-space);
+  overflow: hidden;
+}
+
+.fiction-reality-section::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background:
+    radial-gradient(ellipse at 50% 0%, rgba(11, 61, 145, 0.08) 0%, transparent 50%),
+    radial-gradient(ellipse at 80% 80%, rgba(240, 125, 25, 0.04) 0%, transparent 50%);
+  pointer-events: none;
+}
+
+.fiction-reality-inner {
+  position: relative;
+  z-index: 1;
+  max-width: var(--container-xl);
+  margin: 0 auto;
+}
+
+.fiction-reality-header {
+  text-align: center;
+  margin-bottom: 60px;
+}
+
+.fiction-reality-header h2 {
+  font-size: clamp(2rem, 4vw, 3.2rem);
+  margin-bottom: 12px;
+}
+
+.fiction-reality-header .fr-subtitle {
+  font-size: 1rem;
+  color: var(--lunar-gray);
+  max-width: 600px;
+  margin: 0 auto;
+  font-style: italic;
+}
+
+.fr-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 20px;
+}
+
+.fr-card {
+  background: rgba(255, 255, 255, 0.03);
+  border: 1px solid var(--border-color);
+  border-radius: var(--radius-md);
+  padding: 24px;
+  text-decoration: none;
+  color: inherit;
+  transition: all var(--transition-normal);
+  position: relative;
+  overflow: hidden;
+}
+
+.fr-card:hover {
+  border-color: var(--accent-blue);
+  transform: translateY(-4px);
+  box-shadow: var(--shadow-glow-blue);
+  color: inherit;
+}
+
+.fr-card-icon {
+  font-size: 1.8rem;
+  margin-bottom: 12px;
+}
+
+.fr-card h3 {
+  font-size: 1.1rem;
+  margin-bottom: 8px;
+}
+
+.fr-card p {
+  font-size: 0.85rem;
+  color: var(--text-secondary);
+  line-height: 1.6;
+}
+
+/* --- PHM to Real World bridge cards --- */
+.bridge-card {
+  display: grid;
+  grid-template-columns: 1fr auto 1fr;
+  gap: 16px;
+  align-items: start;
+  background: var(--bg-card);
+  border: 1px solid var(--border-color);
+  border-radius: var(--radius-md);
+  padding: 24px;
+  margin: 16px 0;
+  transition: all var(--transition-normal);
+}
+
+.bridge-card:hover {
+  border-color: var(--accent-blue);
+  background: var(--bg-card-hover);
+}
+
+.bridge-fiction {
+  text-align: right;
+}
+
+.bridge-fiction h4 {
+  color: var(--accent-blue);
+  font-size: 0.95rem;
+  margin-bottom: 4px;
+}
+
+.bridge-fiction p {
+  font-size: 0.85rem;
+  color: var(--text-secondary);
+}
+
+.bridge-divider {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--text-tertiary);
+  font-size: 1.2rem;
+  padding: 0 8px;
+}
+
+.bridge-reality h4 {
+  color: var(--orion-orange);
+  font-size: 0.95rem;
+  margin-bottom: 4px;
+}
+
+.bridge-reality p {
+  font-size: 0.85rem;
+  color: var(--text-secondary);
+}
+
+/* --- Hub Mission Cards (for real-space-missions) --- */
+.mission-hub-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+  gap: 24px;
+  margin: 32px 0;
+}
+
+.mission-hub-card {
+  background: var(--bg-card);
+  border: 1px solid var(--border-color);
+  border-radius: var(--radius-lg);
+  overflow: hidden;
+  transition: all var(--transition-normal);
+  text-decoration: none;
+  color: inherit;
+  display: block;
+}
+
+.mission-hub-card:hover {
+  transform: translateY(-6px);
+  border-color: var(--accent-blue);
+  box-shadow: var(--shadow-glow-blue);
+  color: inherit;
+}
+
+.mission-hub-visual {
+  height: 180px;
+  background: var(--bg-tertiary);
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+}
+
+.mission-hub-visual .hub-icon {
+  font-size: 3rem;
+  opacity: 0.4;
+}
+
+.mission-hub-visual .hub-badge {
+  position: absolute;
+  top: 12px;
+  right: 12px;
+  font-size: 0.65rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  padding: 4px 10px;
+  border-radius: 100px;
+}
+
+.hub-badge.active { background: rgba(74, 222, 128, 0.15); color: var(--telemetry-green); border: 1px solid rgba(74, 222, 128, 0.2); }
+.hub-badge.upcoming { background: rgba(250, 204, 21, 0.1); color: var(--telemetry-yellow); border: 1px solid rgba(250, 204, 21, 0.2); }
+.hub-badge.historical { background: rgba(148, 163, 184, 0.1); color: var(--text-tertiary); border: 1px solid rgba(148, 163, 184, 0.2); }
+
+.mission-hub-body {
+  padding: 24px;
+}
+
+.mission-hub-body h3 {
+  font-size: 1.15rem;
+  margin-bottom: 8px;
+}
+
+.mission-hub-body p {
+  font-size: 0.9rem;
+  color: var(--text-secondary);
+  line-height: 1.6;
+}
+
+/* --- Responsive additions --- */
+@media (max-width: 768px) {
+  .era-timeline {
+    flex-direction: column;
+    align-items: center;
+    gap: 24px;
+    padding: 20px 0;
+  }
+
+  .era-timeline::before {
+    display: none;
+  }
+
+  .era-node {
+    flex-direction: row;
+    gap: 16px;
+    width: 100%;
+  }
+
+  .era-node-dot {
+    margin-bottom: 0;
+    flex-shrink: 0;
+  }
+
+  .era-node-desc {
+    text-align: left;
+  }
+
+  .bridge-card {
+    grid-template-columns: 1fr;
+    text-align: center;
+  }
+
+  .bridge-fiction { text-align: center; }
+  .bridge-reality { text-align: center; }
+
+  .hud-grid {
+    grid-template-columns: 1fr 1fr;
+  }
+
+  .fiction-compare {
+    font-size: 0.85rem;
+  }
+
+  .fiction-compare thead th,
+  .fiction-compare tbody td {
+    padding: 12px 14px;
+  }
+
+  .launch-sequence {
+    padding: 24px 16px;
+  }
+}
+
+@media (max-width: 480px) {
+  .hud-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .astronaut-grid {
+    grid-template-columns: 1fr;
+  }
+}

@@ -34,6 +34,20 @@ document.querySelectorAll(".faq-question").forEach((button) => {
   button.addEventListener("click", () => button.closest(".faq-item").classList.toggle("open"));
 });
 
+document.querySelectorAll(".mission-panel-header").forEach((header) => {
+  header.addEventListener("click", () => {
+    header.closest(".mission-panel").classList.toggle("open");
+    header.setAttribute("aria-expanded", header.closest(".mission-panel").classList.contains("open"));
+  });
+  header.addEventListener("keydown", (e) => {
+    if (e.key === "Enter" || e.key === " ") {
+      e.preventDefault();
+      header.closest(".mission-panel").classList.toggle("open");
+      header.setAttribute("aria-expanded", header.closest(".mission-panel").classList.contains("open"));
+    }
+  });
+});
+
 const energyInput = document.querySelector("#energy-input");
 const energyOutput = document.querySelector("#energy-output");
 if (energyInput && energyOutput) {
@@ -72,5 +86,18 @@ document.querySelectorAll("[data-filter]").forEach((button) => {
     });
     document.querySelectorAll("[data-filter]").forEach((item) => item.classList.remove("active"));
     button.classList.add("active");
+  });
+});
+
+/* --- Era Timeline Interactivity --- */
+document.querySelectorAll(".era-node").forEach((node) => {
+  node.addEventListener("click", (e) => {
+    const era = node.dataset.era;
+    if (!era) return;
+    document.querySelectorAll(".era-node").forEach((n) => n.classList.remove("active"));
+    node.classList.add("active");
+    document.querySelectorAll(".era-detail").forEach((d) => d.classList.remove("active"));
+    const target = document.querySelector(`.era-detail[data-era="${era}"]`);
+    if (target) target.classList.add("active");
   });
 });
