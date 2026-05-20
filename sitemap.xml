@@ -80,6 +80,18 @@
     <changefreq>monthly</changefreq>
   </url>
 
+  <!-- Site Info Pages -->
+  <url>
+    <loc>https://phmexplained.com/about.html</loc>
+    <priority>0.5</priority>
+    <changefreq>monthly</changefreq>
+  </url>
+  <url>
+    <loc>https://phmexplained.com/contact.html</loc>
+    <priority>0.4</priority>
+    <changefreq>monthly</changefreq>
+  </url>
+
   <!-- Legal & Compliance Pages -->
   <url>
     <loc>https://phmexplained.com/privacy-policy.html</loc>
