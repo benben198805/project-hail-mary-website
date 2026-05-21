@@ -1,0 +1,556 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    --color-space-black: #0a0e17;
+    --color-space-darker: #060912;
+    --color-space-dark: #0d1321;
+    --color-space-medium: #121a2f;
+    --color-space-light: #1a2440;
+    --color-space-border: #1e2d50;
+    --color-space-text: #94a3b8;
+    --color-space-heading: #e2e8f0;
+    --accent-blue: #3b82f6;
+    --accent-amber: #f59e0b;
+    --accent-purple: #8b5cf6;
+    --accent-teal: #14b8a6;
+  }
+
+  html {
+    scroll-behavior: smooth;
+  }
+
+  body {
+    background-color: var(--color-space-black);
+    color: var(--color-space-text);
+    font-family: 'Inter', system-ui, sans-serif;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
+
+  ::selection {
+    background-color: rgba(59, 130, 246, 0.3);
+    color: #e2e8f0;
+  }
+
+  /* Scrollbar */
+  ::-webkit-scrollbar {
+    width: 8px;
+  }
+  ::-webkit-scrollbar-track {
+    background: var(--color-space-darker);
+  }
+  ::-webkit-scrollbar-thumb {
+    background: var(--color-space-border);
+    border-radius: 4px;
+  }
+  ::-webkit-scrollbar-thumb:hover {
+    background: var(--color-space-text);
+  }
+}
+
+@layer components {
+  /* Navigation */
+  .nav-link {
+    @apply text-sm font-medium text-space-text transition-colors duration-200 hover:text-space-heading;
+  }
+  .nav-link.active {
+    @apply text-accent-blue;
+  }
+
+  /* Buttons */
+  .btn {
+    @apply inline-flex items-center justify-center rounded-lg px-5 py-2.5 text-sm font-semibold transition-all duration-200;
+  }
+  .btn-primary {
+    @apply bg-accent-blue text-white hover:bg-accent-blue-light shadow-lg shadow-blue-500/20;
+  }
+  .btn-secondary {
+    @apply bg-space-light text-space-heading hover:bg-space-border border border-space-border;
+  }
+  .btn-outline {
+    @apply border border-space-border text-space-text hover:border-accent-blue hover:text-accent-blue;
+  }
+  .btn-sm {
+    @apply px-3.5 py-2 text-xs;
+  }
+
+  /* Cards */
+  .card {
+    @apply rounded-xl border border-space-border bg-space-dark p-5 transition-all duration-200 hover:border-accent-blue/30;
+  }
+
+  /* Tags */
+  .tag {
+    @apply inline-block rounded-full px-3 py-1 text-xs font-semibold uppercase tracking-wider;
+  }
+  .tag-blue {
+    @apply bg-blue-500/10 text-accent-blue;
+  }
+  .tag-amber {
+    @apply bg-amber-500/10 text-accent-amber;
+  }
+  .tag-purple {
+    @apply bg-purple-500/10 text-accent-purple;
+  }
+  .tag-teal {
+    @apply bg-teal-500/10 text-accent-teal;
+  }
+
+  /* Info Boxes */
+  .info-box {
+    @apply rounded-xl border p-5 text-sm leading-relaxed;
+  }
+  .info-box.blue {
+    @apply border-blue-500/20 bg-blue-500/5 text-space-text;
+  }
+  .info-box.amber {
+    @apply border-amber-500/20 bg-amber-500/5 text-space-text;
+  }
+
+  /* Breadcrumbs */
+  .breadcrumbs {
+    @apply mb-4 flex items-center gap-2 text-xs uppercase tracking-wider text-space-text;
+  }
+  .breadcrumbs a {
+    @apply transition-colors hover:text-accent-blue;
+  }
+
+  /* Section Dividers */
+  .section-divider {
+    @apply my-16 border-0 border-t border-space-border;
+  }
+
+  /* HUD Panels */
+  .hud-panel {
+    @apply rounded-xl border border-space-border bg-space-darker p-6;
+  }
+  .hud-panel-title {
+    @apply mb-4 text-xs font-bold tracking-widest text-accent-blue;
+  }
+  .hud-grid {
+    @apply grid grid-cols-2 gap-4 sm:grid-cols-4;
+  }
+  .hud-item {
+    @apply text-center;
+  }
+  .hud-label {
+    @apply text-[10px] uppercase tracking-wider text-space-text;
+  }
+  .hud-value {
+    @apply mt-1 text-xl font-bold text-space-heading font-display;
+  }
+  .hud-value.nominal {
+    @apply text-accent-green;
+  }
+  .hud-value.caution {
+    @apply text-accent-amber;
+  }
+
+  /* Tech Specs */
+  .tech-spec {
+    @apply my-6 grid grid-cols-2 gap-4 sm:grid-cols-4;
+  }
+  .tech-spec-item {
+    @apply rounded-lg border border-space-border bg-space-medium p-4 text-center;
+  }
+  .tech-spec-value {
+    @apply text-lg font-bold text-space-heading font-display;
+  }
+  .tech-spec-label {
+    @apply mt-1 text-[10px] uppercase tracking-wider text-space-text;
+  }
+
+  /* Mission Panels (Accordion) */
+  .mission-panel {
+    @apply mb-4 overflow-hidden rounded-xl border border-space-border;
+  }
+  .mission-panel-header {
+    @apply flex cursor-pointer items-center justify-between bg-space-dark p-5 transition-colors hover:bg-space-medium;
+  }
+  .mission-panel-body {
+    @apply border-t border-space-border bg-space-darker p-5;
+  }
+  .panel-toggle {
+    @apply text-xl text-space-text transition-transform duration-200;
+  }
+  .mission-panel.open .panel-toggle {
+    transform: rotate(45deg);
+  }
+
+  /* Mission Status */
+  .mission-status {
+    @apply inline-block rounded px-2 py-0.5 text-[10px] font-bold uppercase tracking-wider;
+  }
+  .mission-status.nominal {
+    @apply bg-green-500/10 text-accent-green;
+  }
+  .mission-status.\"in-progress\" {
+    @apply bg-amber-500/10 text-accent-amber;
+  }
+
+  /* Bridge Cards */
+  .bridge-card {
+    @apply mb-4 flex flex-col gap-3 rounded-xl border border-space-border bg-space-dark p-5 sm:flex-row sm:items-center;
+  }
+  .bridge-fiction {
+    @apply sm:w-1/3;
+  }
+  .bridge-divider {
+    @apply text-center text-2xl text-accent-blue sm:w-8;
+  }
+  .bridge-reality {
+    @apply sm:w-1/2;
+  }
+
+  /* Era Timeline */
+  .era-timeline {
+    @apply flex flex-wrap justify-center gap-4;
+  }
+  .era-node {
+    @apply flex flex-col items-center rounded-xl border border-space-border bg-space-dark p-4 text-center transition-all duration-200 hover:border-accent-blue/30;
+  }
+  .era-node-dot {
+    @apply mb-2 h-3 w-3 rounded-full bg-accent-blue;
+  }
+  .era-node-year {
+    @apply text-xs font-bold tracking-wider text-accent-blue;
+  }
+  .era-node-label {
+    @apply mt-1 text-sm font-semibold text-space-heading;
+  }
+  .era-node-desc {
+    @apply mt-0.5 text-xs text-space-text;
+  }
+  .era-node.active {
+    @apply border-accent-blue bg-space-medium;
+  }
+  .era-node-future .era-node-dot {
+    @apply bg-accent-amber;
+  }
+  .era-node-future .era-node-year {
+    @apply text-accent-amber;
+  }
+
+  /* Interactive Timeline */
+  .interactive-timeline .timeline-event {
+    @apply relative mb-6 rounded-xl border border-space-border bg-space-dark p-5 pl-8 transition-all duration-200 hover:border-accent-blue/30;
+  }
+  .timeline-event::before {
+    content: '';
+    @apply absolute left-3 top-5 h-2 w-2 rounded-full bg-accent-blue;
+  }
+  .interactive-timeline .timeline-event[data-era="earth"]::before { @apply bg-accent-amber; }
+  .interactive-timeline .timeline-event[data-era="mission"]::before { @apply bg-accent-blue; }
+  .interactive-timeline .timeline-event[data-era="space"]::before { @apply bg-accent-purple; }
+  .interactive-timeline .timeline-event[data-era="ending"]::before { @apply bg-accent-teal; }
+
+  .event-era {
+    @apply mb-1 text-[10px] font-bold uppercase tracking-widest text-accent-blue;
+  }
+  .event-time {
+    @apply mb-1 text-xs font-medium text-space-text;
+  }
+  .timeline-track {
+    @apply relative;
+  }
+  .timeline-track::before {
+    content: '';
+    @apply absolute left-[11px] top-0 h-full w-0.5 bg-space-border;
+  }
+
+  /* TOC Sidebar */
+  .toc {
+    @apply mb-8 rounded-xl border border-space-border bg-space-dark p-5;
+  }
+  .toc-title {
+    @apply mb-3 text-xs font-bold uppercase tracking-widest text-accent-blue;
+  }
+  .toc-list {
+    @apply space-y-1;
+  }
+  .toc-list a {
+    @apply block rounded px-3 py-1.5 text-sm text-space-text transition-colors hover:bg-space-medium hover:text-accent-blue;
+  }
+  .toc-list a.active {
+    @apply text-accent-blue bg-space-medium;
+  }
+
+  /* Mission Hub Cards */
+  .mission-hub-card {
+    @apply flex flex-col gap-4 rounded-xl border border-space-border bg-space-dark p-5 transition-all duration-200 hover:border-accent-blue/30 sm:flex-row;
+  }
+  .mission-hub-visual {
+    @apply flex items-center gap-3;
+  }
+  .hub-icon {
+    @apply flex h-10 w-10 items-center justify-center rounded-lg bg-space-medium text-lg;
+  }
+  .hub-badge {
+    @apply rounded px-2 py-0.5 text-[10px] font-bold uppercase tracking-wider;
+  }
+  .hub-badge.active {
+    @apply bg-green-500/10 text-accent-green;
+  }
+  .hub-badge.upcoming {
+    @apply bg-amber-500/10 text-accent-amber;
+  }
+
+  /* Mission Hub Grid (2-column on large screens) */
+  .mission-hub-grid {
+    @apply grid gap-4 md:grid-cols-2;
+  }
+
+  /* Official Links */
+  .official-links {
+    @apply flex flex-col gap-2;
+  }
+  .official-link {
+    @apply rounded-lg border border-space-border bg-space-dark p-4 text-sm transition-all duration-200 hover:border-accent-blue/30;
+  }
+  .official-link strong {
+    @apply block text-space-heading;
+  }
+  .official-link span {
+    @apply mt-1 block text-space-text;
+  }
+
+  /* Hero Stars */
+  .hero-stars span {
+    @apply absolute rounded-full bg-white;
+    width: 2px;
+    height: 2px;
+    animation: twinkle var(--duration, 3s) ease-in-out infinite;
+  }
+
+  /* Back to Top */
+  .back-to-top {
+    @apply fixed bottom-6 right-6 z-50 flex h-10 w-10 items-center justify-center rounded-full bg-accent-blue text-white shadow-lg opacity-0 transition-all duration-300 hover:bg-accent-blue-light;
+  }
+  .back-to-top.visible {
+    @apply opacity-100;
+  }
+
+  /* Filter Buttons */
+  .filter-btn {
+    @apply rounded-lg px-4 py-2 text-sm font-medium transition-all;
+  }
+  .filter-btn.active {
+    @apply bg-accent-blue text-white;
+  }
+  .filter-btn:not(.active) {
+    @apply bg-space-dark text-space-text hover:bg-space-light;
+  }
+
+  /* Grid helpers */
+  .grid-2 { @apply grid gap-6 md:grid-cols-2; }
+  .grid-3 { @apply grid gap-6 md:grid-cols-3; }
+  .grid-4 { @apply grid gap-6 sm:grid-cols-2 lg:grid-cols-4; }
+
+  /* Section helpers */
+  .section {
+    @apply mx-auto max-w-wide px-4 py-16;
+  }
+  .section-sm {
+    @apply mx-auto max-w-wide px-4 py-12;
+  }
+  .section-dark {
+    @apply rounded-2xl bg-space-darker;
+  }
+  .section-header {
+    @apply mb-12 text-center;
+  }
+  .section-header h2 {
+    @apply text-2xl font-bold text-space-heading font-display sm:text-3xl;
+  }
+  .section-header p {
+    @apply mt-3 text-space-text;
+  }
+  .section-header-left {
+    @apply mb-12;
+  }
+  .section-header-left h2 {
+    @apply text-2xl font-bold text-space-heading font-display sm:text-3xl;
+  }
+  .section-header-left p {
+    @apply mt-2 text-space-text;
+  }
+
+  /* Text helpers */
+  .text-gradient {
+    @apply bg-gradient-to-r from-accent-blue to-accent-blue-light bg-clip-text text-transparent;
+  }
+
+  /* Content pages */
+  .content-page {
+    @apply mx-auto max-w-content px-4 py-16;
+  }
+  .content-wide {
+    @apply mx-auto max-w-wide px-4 py-16;
+  }
+  .layout-with-toc {
+    @apply flex flex-col gap-8 lg:flex-row;
+  }
+  .layout-with-toc > .toc {
+    @apply lg:sticky lg:top-24 lg:w-56 lg:self-start lg:shrink-0;
+  }
+  .layout-with-toc > article {
+    @apply min-w-0 flex-1;
+  }
+}
+
+/* Content page typography */
+.content h2 {
+  @apply mb-4 mt-12 text-xl font-bold text-space-heading font-display;
+}
+.content h2:first-child {
+  @apply mt-0;
+}
+.content h3 {
+  @apply mb-3 mt-8 text-lg font-semibold text-space-heading;
+}
+.content p {
+  @apply mb-4 leading-relaxed;
+}
+.content ul {
+  @apply mb-4 list-disc space-y-1 pl-6;
+}
+.content a {
+  @apply text-accent-blue transition-colors hover:text-accent-blue-light;
+}
+.content img.content-image {
+  @apply mb-6 w-full rounded-xl;
+}
+.content img.float-right {
+  @apply mb-4 ml-4 w-48 rounded-lg sm:w-56;
+  float: right;
+}
+.content .info-box {
+  @apply mb-6;
+}
+.content .interactive-tool {
+  @apply mb-6 rounded-xl border border-space-border bg-space-dark p-5;
+}
+.content .interactive-tool label {
+  @apply mb-2 block text-sm font-medium text-space-heading;
+}
+.content .interactive-tool input {
+  @apply w-full rounded-lg border border-space-border bg-space-darker px-4 py-2.5 text-white placeholder-space-text focus:border-accent-blue focus:outline-none;
+}
+.content .interactive-tool .output {
+  @apply mt-3 rounded-lg bg-space-medium p-3 text-sm text-accent-blue;
+}
+.content table.fiction-compare {
+  @apply w-full text-left text-sm;
+}
+.content table.fiction-compare th {
+  @apply border-b border-space-border px-4 py-3 text-xs font-bold uppercase tracking-wider text-space-text;
+}
+.content table.fiction-compare td {
+  @apply border-b border-space-border/50 px-4 py-4 leading-relaxed text-space-text;
+}
+.content table.fiction-compare tr:last-child td {
+  @apply border-b-0;
+}
+
+/* Character cards */
+.character-card {
+  @apply overflow-hidden rounded-xl border border-space-border bg-space-dark transition-all duration-200 hover:border-accent-blue/30;
+}
+.character-card-visual img {
+  @apply w-full object-cover;
+}
+.character-card-body {
+  @apply p-5;
+}
+.character-card-body h3 {
+  @apply text-lg font-semibold text-space-heading;
+}
+.character-card-body .role {
+  @apply mt-1 text-xs uppercase tracking-wider text-accent-blue;
+}
+.character-card-body p {
+  @apply mt-2 text-sm leading-relaxed text-space-text;
+}
+
+/* Glass card */
+.glass-card {
+  @apply rounded-xl border border-space-border bg-space-dark/80 p-8 backdrop-blur-sm transition-all duration-200 hover:border-accent-blue/30;
+}
+
+/* Hero section */
+.hero-section {
+  @apply relative flex min-h-[60vh] items-center justify-center overflow-hidden;
+}
+.hero-content-centered {
+  @apply relative z-10 mx-auto max-w-3xl px-4 text-center;
+}
+
+/* Page header */
+.page-header-bg {
+  @apply relative overflow-hidden bg-space-darker py-16;
+}
+
+/* Featured cards */
+.image-card {
+  @apply overflow-hidden rounded-xl border border-space-border bg-space-dark transition-all duration-200 hover:border-accent-blue/30;
+}
+.image-card .card-media {
+  @apply w-full object-cover;
+}
+.image-card-content {
+  @apply p-4;
+}
+.image-card-content h3 {
+  @apply text-base font-semibold text-space-heading;
+}
+.image-card-content p {
+  @apply mt-1 text-sm text-space-text;
+}
+
+/* Timeline preview on homepage */
+.timeline-preview {
+  @apply grid gap-4 md:grid-cols-5;
+}
+.timeline-card {
+  @apply rounded-xl border border-space-border bg-space-dark p-4 transition-all duration-200 hover:border-accent-blue/30;
+}
+.timeline-card .era {
+  @apply text-[10px] font-bold uppercase tracking-widest text-accent-blue;
+}
+.timeline-card .year {
+  @apply mt-1 text-lg font-bold text-space-heading font-display;
+}
+.timeline-card h3 {
+  @apply mt-1 text-sm font-semibold text-space-heading;
+}
+.timeline-card p {
+  @apply mt-1 text-xs text-space-text;
+}
+
+/* Official showcase */
+.official-showcase {
+  @apply mb-8 flex flex-col gap-6 sm:flex-row sm:items-center;
+}
+.official-showcase img {
+  @apply w-full rounded-xl sm:w-1/3;
+}
+
+/* Fiction-reality cards */
+.fr-grid {
+  @apply grid gap-6 md:grid-cols-3;
+}
+.fr-card {
+  @apply rounded-xl border border-space-border bg-space-dark p-6 transition-all duration-200 hover:border-accent-blue/30;
+}
+.fr-card-icon {
+  @apply mb-3 text-2xl;
+}
+.fr-card h3 {
+  @apply text-lg font-semibold text-space-heading;
+}
+.fr-card p {
+  @apply mt-2 text-sm text-space-text;
+}

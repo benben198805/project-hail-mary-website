@@ -14,16 +14,23 @@ Thumbs.db
 # Environment
 .env
 .env.local
+.env.*.local
 
-# Dependencies (if any Node/npm in future)
+# Dependencies
 node_modules/
 package-lock.json
-yarn.lock
 
-# Build output (if any build tools added later)
+# Next.js
+.next/
+out/
+
+# Build output
 dist/
 build/
-out/
+
+# TypeScript
+*.tsbuildinfo
+next-env.d.ts
 
 # Logs
 *.log
