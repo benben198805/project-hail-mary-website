@@ -28,42 +28,61 @@ export default function TimelineFilterClient({ events }: { events: TimelineEvent
       : events.filter((event) => event.era === activeFilter);
 
   return (
-    <aside className="toc lg:sticky lg:top-24 lg:w-56 lg:self-start lg:shrink-0">
-      <div className="toc-title">Timeline Filter</div>
-      <ul className="toc-list">
-        {filters.map((f) => (
-          <li key={f.value}>
-            <button
-              className={`block w-full rounded px-3 py-1.5 text-left text-sm transition-colors ${
-                activeFilter === f.value
-                  ? 'bg-[#121a2f] text-[#3b82f6]'
-                  : 'text-[#94a3b8] hover:bg-[#121a2f] hover:text-[#3b82f6]'
-              }`}
-              onClick={() => setActiveFilter(f.value)}
-            >
-              {f.label}
-            </button>
-          </li>
-        ))}
-      </ul>
-
-      <div className="mt-8">
-        <div className="timeline-track">
-          {filteredEvents.map((event) => (
-            <article
-              key={event.id}
-              className="timeline-event mb-6"
-              data-era={event.era}
-              id={event.id}
-            >
-              <div className="event-era">{event.eraLabel}</div>
-              <div className="event-time">{event.time}</div>
-              <h3 className="text-lg font-semibold text-[#e2e8f0]">{event.title}</h3>
-              <p className="mt-2 text-sm text-[#94a3b8]">{event.description}</p>
-            </article>
+    <div className="mx-auto flex max-w-[1120px] flex-col gap-8 px-4 py-16 lg:flex-row">
+      {/* Sidebar: filter buttons */}
+      <aside className="toc lg:sticky lg:top-24 lg:w-56 lg:self-start lg:shrink-0">
+        <div className="toc-title">Timeline Filter</div>
+        <ul className="toc-list">
+          {filters.map((f) => (
+            <li key={f.value}>
+              <button
+                className={`block w-full rounded px-3 py-1.5 text-left text-sm transition-colors ${
+                  activeFilter === f.value
+                    ? 'bg-[#121a2f] text-[#3b82f6]'
+                    : 'text-[#94a3b8] hover:bg-[#121a2f] hover:text-[#3b82f6]'
+                }`}
+                onClick={() => setActiveFilter(f.value)}
+              >
+                {f.label}
+              </button>
+            </li>
           ))}
+        </ul>
+      </aside>
+
+      {/* Main content: timeline events */}
+      <article className="min-w-0 flex-1 content">
+        <div className="info-box blue">
+          <p><strong>Note:</strong> This page summarizes plot structure in original words and avoids long copyrighted excerpts.</p>
         </div>
-      </div>
-    </aside>
+
+        <section className="interactive-timeline" id="all">
+          <div className="timeline-track">
+            {filteredEvents.map((event) => (
+              <article
+                key={event.id}
+                className="timeline-event"
+                data-era={event.era}
+                id={event.id}
+              >
+                <div className="event-era">{event.eraLabel}</div>
+                <div className="event-time">{event.time}</div>
+                <h3 className="text-lg font-semibold text-[#e2e8f0]">{event.title}</h3>
+                <p className="mt-2 text-sm leading-relaxed text-[#94a3b8]">{event.description}</p>
+              </article>
+            ))}
+          </div>
+        </section>
+
+        <div className="info-box blue">
+          <p>
+            <strong>Continue exploring:</strong> Meet the{' '}
+            <a href="/characters">characters of Project Hail Mary</a>, dive into the{' '}
+            <a href="/science">science behind Astrophage and the spin drive</a>, or read the{' '}
+            <a href="/project-hail-mary-ending-explained">ending analysis</a>.
+          </p>
+        </div>
+      </article>
+    </div>
   );
 }

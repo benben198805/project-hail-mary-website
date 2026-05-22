@@ -126,28 +126,7 @@ export default function TimelinePage() {
         </div>
       </header>
 
-      <div className="mx-auto flex max-w-[1120px] flex-col gap-8 px-4 py-16 lg:flex-row">
-        <TimelineFilterClient events={timelineEvents} />
-
-        <article className="min-w-0 flex-1 content">
-          <section>
-            <div className="info-box blue">
-              <p><strong>Note:</strong> This page summarizes plot structure in original words and avoids long copyrighted excerpts.</p>
-            </div>
-          </section>
-
-          <section>
-            <div className="info-box blue">
-              <p>
-                <strong>Continue exploring:</strong> Meet the{' '}
-                <Link href="/characters">characters of Project Hail Mary</Link>, dive into the{' '}
-                <Link href="/science">science behind Astrophage and the spin drive</Link>, or read the{' '}
-                <Link href="/project-hail-mary-ending-explained">ending analysis</Link>.
-              </p>
-            </div>
-          </section>
-        </article>
-      </div>
+      <TimelineFilterClient events={timelineEvents} />
     </>
   );
 }
