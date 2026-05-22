@@ -96,3 +96,42 @@ npm run lint     # Run ESLint
 - The site uses `trailingSlash: true` in next.config.js
 - All page content is original commentary — no copyrighted book text
 - Original HTML files in the project root are the legacy version; `src/` is the new Next.js codebase
+
+## Cloudflare Pages Deployment
+
+This site deploys to Cloudflare Pages as a static export.
+
+### Prerequisites
+
+1. Install Wrangler CLI: `npm install -g wrangler` (or use `npx wrangler`)
+2. Authenticate: `npx wrangler login`
+3. Create the project on Cloudflare Pages (one-time):
+   ```bash
+   npx wrangler pages project create phm-explained --production-branch main
+   ```
+
+### Commands
+
+```bash
+npm run deploy        # Full build + deploy to Cloudflare Pages
+npm run deploy:ci     # Deploy existing out/ (for CI pipelines)
+npm run deploy:dry-run # Build + dry-run (preview without publishing)
+```
+
+### Cloudflare Dashboard Configuration
+
+If using Git integration (Cloudflare dashboard → Workers & Pages → Create → Connect to Git):
+
+| Setting | Value |
+|---|---|
+| Framework preset | Next.js (Static) or None |
+| Build command | `npm run build` |
+| Build output directory | `out/` |
+| Root directory | `/` |
+| Node.js version | 18 (or later) |
+
+### Notes
+
+- The site uses `output: 'export'` in `next.config.js` — fully static, no Node.js server needed
+- Cloudflare Pages automatically serves `index.html` from subdirectories (compatible with `trailingSlash: true`)
+- No `@cloudflare/next-on-pages` needed — this is a pure static export
