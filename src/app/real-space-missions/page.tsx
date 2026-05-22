@@ -43,7 +43,7 @@ export default function RealSpaceMissionsPage() {
       <div className="mx-auto max-w-[1120px] px-4 py-16">
         {/* MISSION BRIEFING HUD Panel */}
         <div className="hud-panel mb-12">
-          <div className="hud-panel-title">// MISSION BRIEFING</div>
+          <div className="hud-panel-title">MISSION BRIEFING</div>
           <div className="hud-grid">
             <div className="hud-item">
               <div className="hud-value">6+</div>

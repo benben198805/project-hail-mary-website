@@ -53,6 +53,7 @@ export default function SciencePage() {
 
         <article className="min-w-0 flex-1 content">
           <section id="astrophage">
+            {/* eslint-disable-next-line @next/next/no-img-element */}
             <img className="mb-6 w-full rounded-xl" src="/images/science-astrophage-glow.webp" alt="Glowing Astrophage-inspired scientific particles under dark laboratory lighting." loading="lazy" />
             <h2>Astrophage Explained</h2>
             <p>Astrophage works as a fictional organism because it connects biology, energy storage, infrared behavior, and planetary stakes. The idea is speculative, but the book keeps the rules consistent enough that readers can reason with them.</p>
@@ -62,12 +63,14 @@ export default function SciencePage() {
           </section>
 
           <section id="spin-drive">
+            {/* eslint-disable-next-line @next/next/no-img-element */}
             <img className="mb-6 w-full rounded-xl" src="/images/science-spin-drive.webp" alt="Original spin drive propulsion concept with blue-white high energy exhaust." loading="lazy" />
             <h2>How the Spin Drive Works</h2>
             <p>The spin drive turns Astrophage from a threat into a propulsion system. The important story move is that the same phenomenon endangering Earth also becomes the tool that makes the rescue mission possible.</p>
           </section>
 
           <section id="eridian">
+            {/* eslint-disable-next-line @next/next/no-img-element */}
             <img className="mb-6 w-full rounded-xl" src="/images/science-spin-drive-2.webp" alt="Futuristic alien engineering visualization for Eridian science and materials." loading="lazy" />
             <h2>Why Rocky Breathes Ammonia</h2>
             <p>Rocky&apos;s biology pushes the story away from rubber-forehead aliens. Pressure, temperature, atmosphere, senses, and materials all shape how the Eridians build, perceive, and survive.</p>
