@@ -1,0 +1,12 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="600" height="900" viewBox="0 0 600 900">
+  <rect width="600" height="900" fill="#0d1321"/>
+  <rect x="1" y="1" width="598" height="898" fill="none" stroke="#1e2d50" stroke-width="2" rx="8"/>
+  <line x1="200" y1="380" x2="400" y2="380" stroke="#1e2d50" stroke-width="2" stroke-linecap="round"/>
+  <line x1="250" y1="400" x2="350" y2="400" stroke="#1e2d50" stroke-width="2" stroke-linecap="round"/>
+  <circle cx="300" cy="300" r="50" fill="none" stroke="#3b82f6" stroke-width="2" opacity="0.5"/>
+  <path d="M285 300 h30 M300 285 v30" stroke="#3b82f6" stroke-width="2" stroke-linecap="round" opacity="0.5"/>
+  <line x1="150" y1="500" x2="450" y2="500" stroke="#1e2d50" stroke-width="1" stroke-linecap="round" opacity="0.3"/>
+  <rect x="220" y="520" width="160" height="16" rx="4" fill="#121a2f"/>
+  <rect x="240" y="546" width="120" height="12" rx="4" fill="#121a2f"/>
+  <text x="300" y="620" text-anchor="middle" fill="#94a3b8" font-family="system-ui" font-size="13" opacity="0.6">Poster Preview</text>
+</svg>

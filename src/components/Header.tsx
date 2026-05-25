@@ -13,6 +13,7 @@ const navItems = [
   { href: '/artemis-ii', label: 'Artemis II' },
   { href: '/fiction-vs-reality', label: 'Fiction vs Reality' },
   { href: '/project-hail-mary-ending-explained', label: 'Ending' },
+  { href: '/gallery', label: 'Gallery' },
 ];
 
 export default function Header() {

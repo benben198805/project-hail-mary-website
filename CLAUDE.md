@@ -78,6 +78,7 @@ npm run lint     # Run ESLint
 | `/dmca-policy` | `dmca-policy/page.tsx` | Legal |
 | `/fan-theories` | `fan-theories/page.tsx` | Content (fan theories) |
 | `/fiction-vs-reality` | `fiction-vs-reality/page.tsx` | Content (comparison) |
+| `/gallery` | `gallery/page.tsx` | Content (poster gallery) |
 | `/nasa-tech` | `nasa-tech/page.tsx` | Content (NASA technology) |
 | `/needoh` | `needoh/page.tsx` | Content (fan culture) |
 | `/privacy-policy` | `privacy-policy/page.tsx` | Legal |
