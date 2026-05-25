@@ -78,7 +78,6 @@ src/
 - **SEO optimized:** Per-page metadata, structured data (BreadcrumbList, Article), Open Graph, Twitter cards
 - **Dynamic sitemap** and robots.txt
 - **Mobile responsive** design with dark space theme
-- **Google AdSense** integration
 - **Custom 404 page**
 
 ## Design

@@ -41,9 +41,6 @@ export const metadata: Metadata = {
     ],
     apple: [{ url: '/apple-touch-icon.png' }],
   },
-  other: {
-    'google-adsense-account': 'ca-pub-1670714160696421',
-  },
 };
 
 export default function RootLayout({
@@ -54,11 +51,9 @@ export default function RootLayout({
   return (
     <html lang="en" className={`${inter.variable} ${spaceGrotesk.variable}`}>
       <head>
-        <script
-          async
-          src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-1670714160696421"
-          crossOrigin="anonymous"
-        />
+        <script src="https://pl29550412.effectivecpmnetwork.com/c6/be/5a/c6be5a52e8413e28dc8c31a79b373a56.js" />
+        <script src="https://pl29550412.effectivecpmnetwork.com/c6/be/5a/c6be5a52e8413e28dc8c31a79b373a56.js" />
+        <script src="https://pl29550414.effectivecpmnetwork.com/21/b4/33/21b43341e308b765e7f48fa55812acfc.js" />
       </head>
       <body className="min-h-screen bg-[#0a0e17] text-[#94a3b8] font-sans antialiased">
         <Header />

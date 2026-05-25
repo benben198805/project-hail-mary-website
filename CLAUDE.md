@@ -92,39 +92,47 @@ npm run lint     # Run ESLint
 
 - This is a **static site** — `next.config.js` has `output: 'export'`
 - Images are **unoptimized** (`images.unoptimized: true`) for static export compatibility
-- Google AdSense script is in the root `layout.tsx`
 - The site uses `trailingSlash: true` in next.config.js
 - All page content is original commentary — no copyrighted book text
 - Original HTML files in the project root are the legacy version; `src/` is the new Next.js codebase
 
 ## Cloudflare Pages Deployment
 
-This site deploys to Cloudflare Pages as a static export.
+This site deploys to Cloudflare Pages as a static export. The site uses `output: 'export'` in `next.config.js` — fully static, no Node.js server needed.
 
-### Prerequisites
+### ⚠️ Critical: Framework Preset Must Be "None"
 
-1. Install Wrangler CLI: `npm install -g wrangler` (or use `npx wrangler`)
-2. Authenticate: `npx wrangler login`
-3. Create the project on Cloudflare Pages (one-time):
-   ```bash
-   npx wrangler pages project create phm-explained --production-branch main
-   ```
+Cloudflare auto-detects Next.js projects and tries to use `@opennextjs/cloudflare` (OpenNext), which requires a Node.js server. **This project must NOT use OpenNext.**
 
-### Commands
+- If you see an error about `@opennextjs/cloudflare` or `opennextjs-cloudflare build`, the framework preset is wrong
+- Go to Cloudflare dashboard → your Pages project → **Settings** → **Build configuration** → **Framework preset** → set to **"None"**
+- Then set **Build command** to `npm run build` and **Build output directory** to `out/`
+- Do NOT use "Next.js" or "Next.js (Static)" presets — they trigger the OpenNext build
+
+### Option A: Wrangler CLI (recommended for testing)
+
+Build locally and upload the static files directly:
 
 ```bash
-npm run deploy        # Full build + deploy to Cloudflare Pages
-npm run deploy:ci     # Deploy existing out/ (for CI pipelines)
-npm run deploy:dry-run # Build + dry-run (preview without publishing)
+npm run deploy          # Build + deploy to Cloudflare Pages
+npm run deploy:ci       # Deploy existing out/ (for CI pipelines)
+npm run deploy:dry-run  # Build + dry-run preview
 ```
 
-### Cloudflare Dashboard Configuration
+First-time setup:
 
-If using Git integration (Cloudflare dashboard → Workers & Pages → Create → Connect to Git):
+```bash
+npx wrangler login
+npx wrangler pages project create phm-explained --production-branch main
+```
+
+### Option B: Git Integration (Cloudflare Dashboard)
+
+Connect your Git repository in Cloudflare Pages dashboard. **Must use these exact settings:**
 
 | Setting | Value |
 |---|---|
-| Framework preset | Next.js (Static) or None |
+| Framework preset | **None** (NOT "Next.js" or "Next.js (Static)") |
 | Build command | `npm run build` |
 | Build output directory | `out/` |
 | Root directory | `/` |
@@ -132,6 +140,5 @@ If using Git integration (Cloudflare dashboard → Workers & Pages → Create �
 
 ### Notes
 
-- The site uses `output: 'export'` in `next.config.js` — fully static, no Node.js server needed
 - Cloudflare Pages automatically serves `index.html` from subdirectories (compatible with `trailingSlash: true`)
-- No `@cloudflare/next-on-pages` needed — this is a pure static export
+- No `@opennextjs/cloudflare` or `@cloudflare/next-on-pages` needed — this is a pure static export
